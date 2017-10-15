@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>trello</title>
+</head>
+<body>
+
+	testing trello
+
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="https://api.trello.com/1/client.js?key=a4aa03aafc815f9f64e5fbd0ee20b35c"></script>
+	<script type="text/javascript">
+
+		var FetchBoardActions = function () {
+				console.log('login successful');
+
+				//get all the trello boards
+				Trello.members.get("abelagoi/boards", function (response) {
+					console.dir(response);
+				});
+
+				//get all the actions for a particular trello board
+				Trello.boards.get("59cccdc1bdc5f54b5968268b/actions", function (response) {
+					console.dir(response);
+				});
+		}
+
+		Trello.authorize({
+			type: "popup",
+			name: "Trello Test",
+			scope: {
+				read: true,
+				write: false
+			},
+			expiration: "never",
+			success: FetchBoardActions,
+			error: function () {
+				console.log('login failed')
+			}
+		});
+	</script>
+</body>
+</html>
